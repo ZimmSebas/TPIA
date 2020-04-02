@@ -88,7 +88,7 @@ def search(problem, fringe):
 
 
 def armarsolucion(padres,nodo):
-    
+        
     (sucesor,accion,costo) = nodo
     solucion = [accion]
         
@@ -98,7 +98,6 @@ def armarsolucion(padres,nodo):
         solucion = [accion] + solucion 
     
     return solucion[1:]
-
 
 def depthFirstSearch(problem):
     """
@@ -129,9 +128,7 @@ def depthFirstSearch(problem):
             return armarsolucion(padres,nodo)
         else:
             listahijos = problem.getSuccessors(pos)
-            # ~ print "\n" , nodo, "\n"
             for hijo in listahijos:
-                # ~ print hijo
                 if(not(padres.has_key(hijo))): 
                     padres[hijo] = nodo
                     listanodos.push(hijo)
@@ -165,29 +162,47 @@ def breadthFirstSearch(problem):
     return []
     
 
+def armarsolucionconCosto(padres,nodo):
+    
+    (sucesor,accion,costo) = nodo
+    solucion = [accion]
+        
+    while (padres[sucesor] != (None,0)):
+        (nodo,costo) = padres[sucesor]
+        (sucesor,accion,costo) = nodo
+        solucion = [accion] + solucion 
+    
+    return solucion[1:]
+
 def uniformCostSearch(problem):
-    
-    
+
     listanodos = util.PriorityQueue()
     inicio = problem.getStartState()
     listanodos.push((inicio,"Inicio",1),0)
     solucion = []
     padres = {}
-    padres[inicio] = None
+    padres[inicio] = (None, 0)
     
     while (not(listanodos.isEmpty())):
         nodo = listanodos.pop()
         pos,accion,costo = nodo
         if (problem.isGoalState(pos)):
-            return armarsolucion(padres,nodo)
+            return armarsolucionconCosto(padres,nodo)
         else:
             listahijos = problem.getSuccessors(pos)
             for hijo in listahijos:
-                if(not(padres.has_key(hijo))): 
-                    padres[hijo] = nodo
-                    (posH,accionH,costoH) = hijo
-                    listanodos.push(hijo,costoH)
-    
+                (posH,accionH,costoH) = hijo
+                costoTotal = costo + costoH
+                hijoAcum = (posH,accionH,costoTotal)
+                if(not(padres.has_key(posH))):
+                    padres[posH] = (nodo, costoTotal)  
+                    listanodos.push(hijoAcum, costoTotal)
+                else:
+                    (padreActual, costoActual) = padres[posH]
+                    if(costoTotal < costoActual):
+                        padres[posH] = (nodo,costoTotal)
+                        listanodos.push(hijoAcum, costoTotal)
+                        
     return []
 
 def nullHeuristic(state, problem=None):
@@ -199,6 +214,37 @@ def nullHeuristic(state, problem=None):
 
 def aStarSearch(problem, heuristic=nullHeuristic):
     "Search the node that has the lowest combined cost and heuristic first."
+    listanodos = util.PriorityQueue()
+    inicio = problem.getStartState()
+    listanodos.push((inicio,"Inicio",1),0)
+    solucion = []
+    padres = {}
+    padres[inicio] = (None, 0)
+    
+    while (not(listanodos.isEmpty())):
+        nodo = listanodos.pop()
+        pos,accion,costo = nodo
+        if (problem.isGoalState(pos)):
+            return armarsolucionconCosto(padres,nodo)
+        else:
+            listahijos = problem.getSuccessors(pos)
+            for hijo in listahijos:
+                (posH,accionH,costoH) = hijo
+                costoG = costo + costoH
+                costoHeuristica = heuristic(posH,problem)
+                costoF = costoG + costoHeuristica 
+                
+                hijoAcum = (posH,accionH,costoF)
+                if(not(padres.has_key(posH))):
+                    padres[posH] = (nodo, costoG)  
+                    listanodos.push(hijoAcum, costoF)
+                else:
+                    (padreActual, costoActual) = padres[posH]
+                    if(costoG < costoActual):
+                        padres[posH] = (nodo,costoG)
+                        listanodos.push(hijoAcum, costoF)
+
+    
 
 # Abbreviations
 bfs = breadthFirstSearch

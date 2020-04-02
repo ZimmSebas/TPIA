@@ -275,18 +275,21 @@ class CornersProblem(search.SearchProblem):
             if not startingGameState.hasFood(*corner):
                 print 'Warning: no food in corner ' + str(corner)
         self._expanded = 0 # Number of search nodes expanded
+        self.finded = (False, False, False, False)
+        # ~ self._visited, self._visitedlist = {}, []
 
-        "*** YOUR CODE HERE ***"
-
+        
     def getStartState(self):
         "Returns the start state (in your state space, not the full Pacman state space)"
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        # ~ util.raiseNotDefined()
+        return (self.startingPosition, self.finded)
+        
 
     def isGoalState(self, state):
         "Returns whether this search state is a goal state of the problem"
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        # ~ util.raiseNotDefined()
+        return state[2] == (True, True, True, True)
 
     def getSuccessors(self, state):
         """
@@ -308,10 +311,24 @@ class CornersProblem(search.SearchProblem):
             #   dx, dy = Actions.directionToVector(action)
             #   nextx, nexty = int(x + dx), int(y + dy)
             #   hitsWall = self.walls[nextx][nexty]
-
-            "*** YOUR CODE HERE ***"
-
+            
+            x,y = state[0]
+            dx,dy = Actions.directionToVector(action)
+            nextx,nexty = int(x + dx), int(y + dy)
+            hitsWall = self.walls[nextx][nexty]
+            if(not (hitsWall)):
+                successors.append((nextx,nexty),action,1)
+            
         self._expanded += 1
+
+        pos = self.state[0]
+        (c1,c2,c3,c4) = self.state[1]        
+
+        # if(pos == c1) Comparando si el estado actual alcanzo alguna de las esquinas, para actualizar el goal.
+        
+        # if state not in self._visited:
+            # self._visited[state] = True
+            # self._visitedlist.append(state)
         return successors
 
     def getCostOfActions(self, actions):
