@@ -281,47 +281,34 @@ class CornersProblem(search.SearchProblem):
         
 
     def isGoalState(self, state):
-        return state[1] == (True, True, True, True)
+        pos, goal = state
+        return goal == (True, True, True, True)
 
     def getSuccessors(self, state):
-        (pos,goal) = state
-        
-        successors = []
-        (x,y) = pos
-        
-                
-        (c0,c1,c2,c3) = self.corners
-        (g0,g1,g2,g3) = goal        
+        pos, goal = state
+        x, y = pos
+        g0, g1, g2, g3 = goal        
+        c0, c1, c2, c3 = self.corners
 
         if(pos == c0):
-            goal = (True,g1,g2,g3)
+            goal = (True, g1, g2, g3)
         if(pos == c1):
-            goal = (g0,True,g2,g3)
+            goal = (g0, True, g2, g3)
         if(pos == c2):
-            goal = (g0,g1,True,g3)
+            goal = (g0, g1, True, g3)
         if(pos == c3):
-            goal = (g0,g1,g2,True)
+            goal = (g0, g1, g2, True)
         
-        
+        successors = []
         for action in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
-
-            dx,dy = Actions.directionToVector(action)
-            nextx,nexty = int(x + dx), int(y + dy)
-            posNext = (nextx,nexty)
-            
-            
+            dx, dy = Actions.directionToVector(action)
+            nextx, nexty = int(x + dx), int(y + dy)
+            posNext = (nextx, nexty)
             hitsWall = self.walls[nextx][nexty]
             if(not (hitsWall)):
-                
-                
-                
-                
-                successors.append( ( ( (nextx,nexty),goal) ,action,1) )
+                successors.append((((nextx, nexty), goal), action, 1))
             
         self._expanded += 1
-
-     
-
         return successors
 
     def getCostOfActions(self, actions):
@@ -350,19 +337,19 @@ def cornersHeuristic(state, problem):
     corners = problem.corners # These are the corner coordinates
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
     
-    (pos,goal) = state
-    suma = 0
+    pos, goal = state
+    distanceSum = 0
     total = 0
     
-    for i in [0,1,2,3]:
+    for i in [0, 1, 2, 3]:
         if (not(goal[i])): 
-            suma += util.manhattanDistance(pos,corners[i])
+            distanceSum += util.manhattanDistance(pos, corners[i])
             total += 1
     
     if (total == 0):
         return 0
     
-    return float(suma)/total
+    return float(distanceSum)/total
 
 
 class AStarCornersAgent(SearchAgent):
