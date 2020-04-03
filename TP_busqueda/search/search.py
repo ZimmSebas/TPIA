@@ -92,8 +92,8 @@ def armarsolucion(padres,nodo):
     (sucesor,accion,costo) = nodo
     solucion = [accion]
         
-    while (accion != "Inicio"):
-        nodo = padres[nodo]
+    while (padres[sucesor] != None):
+        nodo = padres[sucesor]
         (sucesor,accion,costo) = nodo
         solucion = [accion] + solucion 
     
@@ -129,8 +129,9 @@ def depthFirstSearch(problem):
         else:
             listahijos = problem.getSuccessors(pos)
             for hijo in listahijos:
-                if(not(padres.has_key(hijo))): 
-                    padres[hijo] = nodo
+                (posH,accionH,costoH) = hijo
+                if(not(padres.has_key(posH))): 
+                    padres[posH] = nodo
                     listanodos.push(hijo)
     
     return []
@@ -155,8 +156,9 @@ def breadthFirstSearch(problem):
         else:
             listahijos = problem.getSuccessors(pos)
             for hijo in listahijos:
-                if(not(padres.has_key(hijo))): 
-                    padres[hijo] = nodo
+                (posH,accionH,costoH) = hijo
+                if(not(padres.has_key(posH))): 
+                    padres[posH] = nodo
                     listanodos.push(hijo)
     
     return []

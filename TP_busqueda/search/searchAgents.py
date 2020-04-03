@@ -275,67 +275,56 @@ class CornersProblem(search.SearchProblem):
             if not startingGameState.hasFood(*corner):
                 print 'Warning: no food in corner ' + str(corner)
         self._expanded = 0 # Number of search nodes expanded
-        self.finded = (False, False, False, False)
-        # ~ self._visited, self._visitedlist = {}, []
-
         
     def getStartState(self):
-        "Returns the start state (in your state space, not the full Pacman state space)"
-        # ~ util.raiseNotDefined()
-        return (self.startingPosition, self.finded)
+        return (self.startingPosition, (False, False, False, False))
         
 
     def isGoalState(self, state):
-        "Returns whether this search state is a goal state of the problem"
-        "*** YOUR CODE HERE ***"
-        # ~ util.raiseNotDefined()
-        return state[2] == (True, True, True, True)
+        return state[1] == (True, True, True, True)
 
     def getSuccessors(self, state):
-        """
-        Returns successor states, the actions they require, and a cost of 1.
-
-         As noted in search.py:
-             For a given state, this should return a list of triples,
-         (successor, action, stepCost), where 'successor' is a
-         successor to the current state, 'action' is the action
-         required to get there, and 'stepCost' is the incremental
-         cost of expanding to that successor
-        """
-
+        (pos,goal) = state
+        
         successors = []
+        (x,y) = pos
+        
+                
+        (c0,c1,c2,c3) = self.corners
+        (g0,g1,g2,g3) = goal        
+
+        if(pos == c0):
+            goal = (True,g1,g2,g3)
+        if(pos == c1):
+            goal = (g0,True,g2,g3)
+        if(pos == c2):
+            goal = (g0,g1,True,g3)
+        if(pos == c3):
+            goal = (g0,g1,g2,True)
+        
+        
         for action in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
-            # Add a successor state to the successor list if the action is legal
-            # Here's a code snippet for figuring out whether a new position hits a wall:
-            #   x,y = currentPosition
-            #   dx, dy = Actions.directionToVector(action)
-            #   nextx, nexty = int(x + dx), int(y + dy)
-            #   hitsWall = self.walls[nextx][nexty]
-            
-            x,y = state[0]
+
             dx,dy = Actions.directionToVector(action)
             nextx,nexty = int(x + dx), int(y + dy)
+            posNext = (nextx,nexty)
+            
+            
             hitsWall = self.walls[nextx][nexty]
             if(not (hitsWall)):
-                successors.append((nextx,nexty),action,1)
+                
+                
+                
+                
+                successors.append( ( ( (nextx,nexty),goal) ,action,1) )
             
         self._expanded += 1
 
-        pos = self.state[0]
-        (c1,c2,c3,c4) = self.state[1]        
+     
 
-        # if(pos == c1) Comparando si el estado actual alcanzo alguna de las esquinas, para actualizar el goal.
-        
-        # if state not in self._visited:
-            # self._visited[state] = True
-            # self._visitedlist.append(state)
         return successors
 
     def getCostOfActions(self, actions):
-        """
-        Returns the cost of a particular sequence of actions.  If those actions
-        include an illegal move, return 999999.  This is implemented for you.
-        """
         if actions == None: return 999999
         x,y= self.startingPosition
         for action in actions:
@@ -360,9 +349,21 @@ def cornersHeuristic(state, problem):
     """
     corners = problem.corners # These are the corner coordinates
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
+    
+    (pos,goal) = state
+    suma = 0
+    total = 0
+    
+    for i in [0,1,2,3]:
+        if (not(goal[i])): 
+            suma += util.manhattanDistance(pos,corners[i])
+            total += 1
+    
+    if (total == 0):
+        return 0
+    
+    return float(suma)/total
 
-    "*** YOUR CODE HERE ***"
-    return 0 # Default to trivial solution
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
