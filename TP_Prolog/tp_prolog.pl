@@ -116,12 +116,9 @@ low(assembler).
 typed(X) :- tstrong(X).
 typed(X) :- tweak(X).
 
-% untyped(X) :- not(typed(X)).
+% untyped(X), not typed?.
+% pure(X), solo funcional y no otro tipo.
 
-% pure function (Funcional solo)
-% multiparadigm
-
-% pure(X) :- 
 
 declarative(X) :- functional(X).
 declarative(X) :- logic(X).
