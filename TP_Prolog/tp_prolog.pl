@@ -33,12 +33,10 @@ procedural(scilab).
 
 % Type System
 
-% Untyped (TO-DO)
-
-untyped(swiprolog).
-untyped(assembler).
-untyped(mysql).
-untyped(datalog).
+% untyped(swiprolog).
+% untyped(assembler).
+% untyped(mysql).
+% untyped(datalog).
 
 % Type checking
 
@@ -113,12 +111,27 @@ medium(fortran).
 low(assembler).
 
 
-typed(X) :- tstrong(X).
-typed(X) :- tweak(X).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% untyped(X), not typed?.
-% pure(X), solo funcional y no otro tipo.
 
+% exclude(are_identical(A), In, Out).
+
+
+
+count(P,Count) :-
+        findall(1,P,L),
+        length(L,Count).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+paradigm(functional,X) :- functional(X).
+paradigm(logic,X) :- logic(X).
+paradigm(query,X) :- query(X).
+paradigm(object,X) :- object(X).
+paradigm(procedural,X) :- procedural(X).
+
+
+pure(X) :- functional(X), count(paradigm(_,X),1).
 
 declarative(X) :- functional(X).
 declarative(X) :- logic(X).
@@ -128,3 +141,18 @@ imperative(X) :- object(X).
 imperative(X) :- procedural(X).
 
 multiparadigm(X) :- imperative(X), declarative(X).
+
+
+
+typed(X) :- tstrong(X).
+typed(X) :- tweak(X).
+
+untyped(X) :- not(typed(X)).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+:- dynamic si/1,no/1.
+satisface(Atributo,_) :- (si(Atributo) -> true ; ( no(Atributo) -> fail ; pregunta(Atributo))).
+
+pregunta(A) :- write('¿Tiene el animal este atributo?: '), write(A), write(' '), read(Resp), nl,
+((Resp == s ; Resp == si ; Resp == sí) -> assert(si(A)); assert(no(A) )), fail.
