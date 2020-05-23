@@ -64,6 +64,9 @@ ada(X) :- lhigh(X),  dgeneric(X), tstatic(X), tstrong(X), pprocedural(X).
 scilab(X) :- lhigh(X), dspecific(X), tdynamic(X), tweak(X), pobject(X), pprocedural(X), pfunctional(X).
 r(X) :- lhigh(X), dspecific(X), tdynamic(X), tweak(X), pobject(X), pprocedural(X).
 
+
+% Recomend function:
+
 recomienda(assembler,X) :- assembler(X).
 recomienda(swiprolog, X) :- swiprolog(X).
 recomienda(datalog, X) :- datalog(X).
@@ -82,8 +85,6 @@ recomienda(scilab, X) :- scilab(X).
 recomienda(r, X) :- r(X).
 recomienda(desconocido, _).
 
-
-% Recomend function:
 
 borraResp :- retractall(si(_)), retractall(no(_)).
 
