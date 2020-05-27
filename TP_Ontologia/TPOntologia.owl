@@ -159,29 +159,7 @@
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#level">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Language"/>
-        <rdfs:range>
-            <rdfs:Datatype>
-                <owl:oneOf>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                        <rdf:first>high</rdf:first>
-                        <rdf:rest>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                <rdf:first>low</rdf:first>
-                                <rdf:rest>
-                                    <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                                        <rdf:first>medium</rdf:first>
-                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                    </rdf:Description>
-                                </rdf:rest>
-                            </rdf:Description>
-                        </rdf:rest>
-                    </rdf:Description>
-                </owl:oneOf>
-            </rdfs:Datatype>
-        </rdfs:range>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Level"/>
     </owl:DatatypeProperty>
     
 
@@ -321,7 +299,20 @@
 
     <!-- http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Language -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Language"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Language">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#level"/>
+                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Level"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#multiparadigm"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
     
 
 
@@ -363,7 +354,14 @@
 
     <!-- http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Program -->
 
-    <owl:Class rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Program"/>
+    <owl:Class rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Program">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#freedomLevel"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
     
 
 
@@ -458,7 +456,6 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Ubuntu">
         <rdf:type rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Operating_System"/>
-        <produced_by rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#cpp"/>
         <freedomLevel rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</freedomLevel>
         <parallel rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</parallel>
         <size rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">25000</size>
@@ -470,7 +467,6 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#ccleaner">
         <rdf:type rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Utility_Program"/>
-        <produced_by rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#cpp"/>
         <freedomLevel rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</freedomLevel>
         <parallel rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</parallel>
         <size rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">24</size>
@@ -482,10 +478,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#cpp">
         <rdf:type rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Typed_Language"/>
-        <belongs_to rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#object_oriented"/>
-        <has rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#cpp_typeSys"/>
         <domain>generic</domain>
-        <level>medium</level>
+        <level rdf:datatype="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Level">medium</level>
         <multiparadigm rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</multiparadigm>
     </owl:NamedIndividual>
     
@@ -513,8 +507,6 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#haskell">
         <rdf:type rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Typed_Language"/>
-        <belongs_to rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#functional"/>
-        <has rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#haskell_typeSys"/>
         <domain>generic</domain>
         <level>high</level>
         <multiparadigm rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</multiparadigm>
@@ -544,7 +536,6 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#mozilla_firefox">
         <rdf:type rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Application_Software"/>
-        <produced_by rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#cpp"/>
         <freedomLevel rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</freedomLevel>
         <parallel rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</parallel>
         <size rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">40</size>
@@ -571,9 +562,6 @@
     <!-- http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#python -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#python">
-        <belongs_to rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#functional"/>
-        <belongs_to rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#object_oriented"/>
-        <has rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#python_typeSys"/>
         <domain>generic</domain>
         <level>high</level>
         <multiparadigm rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</multiparadigm>
@@ -603,7 +591,6 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#spotify_app">
         <rdf:type rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Application_Software"/>
-        <produced_by rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#python"/>
         <freedomLevel rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</freedomLevel>
         <parallel rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</parallel>
         <size rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">108</size>
@@ -615,7 +602,6 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#swiprolog">
         <rdf:type rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Untyped_Language"/>
-        <belongs_to rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#logic"/>
         <domain>specific</domain>
         <level>high</level>
         <multiparadigm rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</multiparadigm>
@@ -637,6 +623,15 @@
             <rdf:Description rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Boot_Program"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Operating_System"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Utility_Program"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Language"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Paradigm"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Program"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Type_System"/>
         </owl:members>
     </rdf:Description>
 </rdf:RDF>
