@@ -288,18 +288,6 @@
     <!-- http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Boot_Program -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Boot_Program">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#System_Software"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#size"/>
-                        <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">16</owl:maxQualifiedCardinality>
-                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#System_Software"/>
     </owl:Class>
     
@@ -350,29 +338,6 @@
     <!-- http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Operating_System -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Operating_System">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#System_Software"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#parallel"/>
-                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#System_Software"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#size"/>
-                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">5000</owl:minQualifiedCardinality>
-                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#System_Software"/>
     </owl:Class>
     
@@ -439,21 +404,6 @@
     <!-- http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Typed_Language -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Typed_Language">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Language"/>
-                    <owl:Class>
-                        <owl:complementOf>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#level"/>
-                                <owl:hasValue>low</owl:hasValue>
-                            </owl:Restriction>
-                        </owl:complementOf>
-                    </owl:Class>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Language"/>
         <owl:disjointWith rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Untyped_Language"/>
     </owl:Class>
@@ -463,17 +413,6 @@
     <!-- http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Untyped_Language -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Untyped_Language">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Language"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#domain"/>
-                        <owl:hasValue>specific</owl:hasValue>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Language"/>
     </owl:Class>
     
@@ -513,8 +452,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#No_anda">
         <rdf:type rdf:resource="http://www.semanticweb.org/seba/ontologies/2020/4/untitled-ontology-4#Operating_System"/>
-        <parallel rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</parallel>
-        <size rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2000</size>
+        <parallel rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</parallel>
+        <size rdf:datatype="http://www.w3.org/2001/XMLSchema#float">2000.0</size>
     </owl:NamedIndividual>
     
 
