@@ -1,0 +1,4 @@
+- Cómo defuzzificar si no queremos máximo promedio?
+- En la primer etapa, la idea es usar crisp u otra cosa? Cuando ponemos "crisp" nos anula los MFs.
+- Hay que hacer 2 FisPro separados para cada etapa?
+- Cómo hacer un OR entre los inputs para una regla?
