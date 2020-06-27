@@ -42,7 +42,7 @@ Active='yes'
 Name='CondicionParcial'
 Range=[       0.000 ,      10.000 ]
 NMFs=3
-MF1='Libre','SemiTrapezoidalInf',[      -4.000 ,       4.000 ,       6.000 ]
+MF1='Libre','SemiTrapezoidalInf',[       0.000 ,       4.000 ,       6.000 ]
 MF2='Regular','trapezoidal',[       4.000 ,       6.000 ,       7.000 ,       9.000 ]
 MF3='Promovido','SemiTrapezoidalSup',[       6.000 ,       8.000 ,      10.000 ]
 

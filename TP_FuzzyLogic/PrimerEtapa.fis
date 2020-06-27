@@ -1,0 +1,46 @@
+[System]
+Name='PrimeraEtapa'
+Ninputs=2
+Noutputs=1
+Nrules=4
+Nexceptions=0
+Conjunction='min'
+MissingValues='random'
+
+[Input1]
+Active='yes'
+Name='Modularizacion'
+Range=[       0.000 ,      10.000 ]
+NMFs=2
+MF1='Mala','SemiTrapezoidalInf',[       0.000 ,       3.000 ,       7.000 ]
+MF2='Buena','SemiTrapezoidalSup',[       3.000 ,       7.000 ,      10.000 ]
+
+[Input2]
+Active='yes'
+Name='Claridad'
+Range=[       0.000 ,      10.000 ]
+NMFs=2
+MF1='Confuso','SemiTrapezoidalInf',[       0.000 ,       3.000 ,       7.000 ]
+MF2='Claro','SemiTrapezoidalSup',[       3.000 ,       7.000 ,      10.000 ]
+
+[Output1]
+Nature='fuzzy'
+Defuzzification='MeanMax'
+Disjunction='sum'
+DefaultValue=      -1.000 
+Classif='no' 
+Active='yes'
+Name='Calidad de Codigo'
+Range=[       0.000 ,      10.000 ]
+NMFs=3
+MF1='Baja','SemiTrapezoidalInf',[       0.000 ,       3.000 ,       5.000 ]
+MF2='Media','trapezoidal',[       2.000 ,       5.000 ,       6.000 ,      10.000 ]
+MF3='Alta','SemiTrapezoidalSup',[       5.000 ,       8.000 ,      10.000 ]
+
+[Rules]
+2, 2,        3.000 ,
+1, 1,        1.000 ,
+1, 2,        2.000 ,
+2, 1,        2.000 ,
+
+[Exceptions]
